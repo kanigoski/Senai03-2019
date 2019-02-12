@@ -1,7 +1,3 @@
-export class OlaMundo {
-    public run() {
-        console.log("Hello World!");
-    }
-}
+import { OlaMundo } from './olamundo';
 
 new OlaMundo().run();
