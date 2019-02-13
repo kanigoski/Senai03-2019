@@ -1,10 +1,14 @@
 import { prompt } from 'inquirer';
 
 export class Pizzaria {
-    public deliveryPizza() {
-        let dadosUsuario = {};
-        let dadosEntrega = {};
+    private dadosPedido : any = null;
+    private dadosEntrega : any = null;
 
+    public deliveryPizza() {
+        this.fazerPedido();
+    }
+
+    private fazerPedido() {
         prompt (
             [
                 {
@@ -45,46 +49,79 @@ export class Pizzaria {
                 }
             ]
         ).then(
-            (deliver : any) => {
-                dadosUsuario = deliver;
+            (pedido : any) => {
+                this.dadosPedido = pedido;
 
-                if (deliver.deliver === 'Sim') {
-                    prompt(
-                        [
-                            {
-                                name: 'city',
-                                type: 'input',
-                                message: 'Cidade:'
-                            },
-                            {
-                                name: 'neighborhood',
-                                type: 'input',
-                                message: 'Bairro:'
-                            },
-                            {
-                                name: 'street',
-                                type: 'input',
-                                message: 'Rua:'
-                            },
-                            {
-                                name: 'number',
-                                type: 'input',
-                                message: 'Número:'
-                            },
-                            {
-                                name: 'complement',
-                                type: 'input',
-                                message: 'Complemento:'
-                            }
-                        ]
-                    ).then(
-                        (address : any) => {
-                            dadosEntrega = address;
-                        }
-                    )
+                if (pedido.deliver == 'Sim') {
+                    this.fazerEntrega();
+                } else {
+                    this.relatorio();
                 }
             }
+         )
+    }
+
+    private fazerEntrega() {
+        prompt (
+            [
+                {
+                    name: 'city',
+                    type: 'input',
+                    message: 'Cidade:'
+                },
+                {
+                    name: 'neighborhood',
+                    type: 'input',
+                    message: 'Bairro:'
+                },
+                {
+                    name: 'street',
+                    type: 'input',
+                    message: 'Rua:'
+                },
+                {
+                    name: 'number',
+                    type: 'input',
+                    message: 'Número:'
+                },
+                {
+                    name: 'complement',
+                    type: 'input',
+                    message: 'Complemento:'
+                }
+            ]
+        ).then(
+            (entrega : any) => {
+                this.dadosEntrega = entrega;
+
+                this.relatorio();
+            }
         )
+    }
+
+    private relatorio() {
+        console.log(
+            '\n\n-----------------------' +
+            '\nDados do Pedido' +
+            '\n-----------------------' +
+            `\nNome: ${this.dadosPedido.name}` +
+            `\nTelefone: ${this.dadosPedido.telephone}` +
+            `\nTamanho: ${this.dadosPedido.size}` +
+            `\nSabor: ${this.dadosPedido.flavor}` +
+            `\nQuantidade: ${this.dadosPedido.qtde}` +
+            `\nEntregar: ${this.dadosPedido.deliver}`
+        );
+
+        if (this.dadosEntrega != null) {
+            console.log(
+                '\n-----------------------' +
+                '\nDados de Entrega' +
+                '\n-----------------------' +
+                `\nCidade: ${this.dadosEntrega.city}` +
+                `\nBairro: ${this.dadosEntrega.neighborhood}` +
+                `\nRua: ${this.dadosEntrega.street} - nº ${this.dadosEntrega.number}` +
+                `\nComplemento: ${this.dadosEntrega.complement}`);
+        }
     }
 };
 
