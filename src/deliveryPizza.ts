@@ -1,10 +1,13 @@
+import { VpHttp } from './http/vphttp';
 import { prompt } from 'inquirer';
 
 export class Pizzaria {
     private dadosPedido : any = null;
     private dadosEntrega : any = null;
+    private sabores : any = null;
 
     public deliveryPizza() {
+        this.getSabores();
         this.fazerPedido();
     }
 
@@ -122,6 +125,17 @@ export class Pizzaria {
                 `\nRua: ${this.dadosEntrega.street} - nº ${this.dadosEntrega.number}` +
                 `\nComplemento: ${this.dadosEntrega.complement}`);
         }
+    }
+
+    public getSabores(){
+        new VpHttp('http://5c649b61c969210014a32eb6.mockapi.io/sabor').get().subscribe(
+            (data : any) => {
+                console.log('Dados', data);
+            },
+            (error : any) => {
+                console.log(error);
+            }
+        );
     }
 };
 
