@@ -1,14 +1,32 @@
 import { VpHttp } from './http/vphttp';
 import { prompt } from 'inquirer';
 
+interface ISabores {
+    sabor: string;
+    disponivel: boolean;
+}
+interface ITamanhos {
+    tamanho: string;
+}
+interface ICidades {
+    descricao: string;
+}
+
+interface IBairros {
+    descricao: string;
+}
 export class Pizzaria {
+    private url = 'http://5c649b61c969210014a32eb6.mockapi.io';
     private dadosPedido : any = null;
     private dadosEntrega : any = null;
-    private sabores : any = null;
+    private sabores : Array<ISabores> = [];
+    private validaSabores : Array<ISabores> = [];
+    private tamanhos : Array<ITamanhos> = [];
+    private cidades : Array<ICidades> = [];
+    private bairros : Array<IBairros> = [];
 
     public deliveryPizza() {
         this.getSabores();
-        this.fazerPedido();
     }
 
     private fazerPedido() {
@@ -28,14 +46,14 @@ export class Pizzaria {
                     name: 'size',
                     type: 'list',
                     message: 'Tamanho da Pizza:',
-                    choices: ['Pequena', 'Média', 'Grande'],
+                    choices: this.tamanhos.map(i => i.tamanho),
                     default: 0,
                 },
                 {
                     name: 'flavor',
                     type: 'list',
                     message: 'Sabor da Pizza:',
-                    choices: ['Marguerita', 'Calabresa', '4 Queijos', 'Mion'],
+                    choices: this.sabores.map(i => i.sabor),
                     default: 0,
                 },
                 {
@@ -69,13 +87,17 @@ export class Pizzaria {
             [
                 {
                     name: 'city',
-                    type: 'input',
-                    message: 'Cidade:'
+                    type: 'list',
+                    message: 'Cidade:',
+                    choices: this.cidades.map(i => i.descricao ),
+                    default: 0
                 },
                 {
                     name: 'neighborhood',
-                    type: 'input',
-                    message: 'Bairro:'
+                    type: 'list',
+                    message: 'Bairro:',
+                    choices: this.bairros.map(i => i.descricao),
+                    default: 0
                 },
                 {
                     name: 'street',
@@ -128,12 +150,76 @@ export class Pizzaria {
     }
 
     public getSabores(){
-        new VpHttp('http://5c649b61c969210014a32eb6.mockapi.io/sabor').get().subscribe(
+        new VpHttp(`${this.url}/sabor`).get().subscribe(
             (data : any) => {
-                console.log('Dados', data);
+                this.validaSabores = data;
+
+                this.validaSabores.map(i => {
+                    if (i.disponivel) {
+                        this.sabores.push(i);
+                    }
+                });
+
+                if (this.sabores !== []) {
+                    this.getTamanhos();
+                } else {
+                    console.log('Nenhum sabor encontrado!');
+                }
             },
             (error : any) => {
-                console.log(error);
+                console.log('Erro ao obter lista de sabores');
+                return;
+            }
+        );
+    }
+
+    public getTamanhos() {
+        new VpHttp(`${this.url}/tamanho`).get().subscribe(
+            (data : any) => {
+                this.tamanhos = data;
+
+                if (this.tamanhos !== []) {
+                    this.getCidades();
+                } else {
+                    console.log('Nenhum tamanho encontrado!');
+                }
+            },
+            (error : any) => {
+                console.log('Erro ao obter lista de tamanhos');
+            }
+        );
+    }
+
+    public getCidades() {
+        new VpHttp(`${this.url}/cidades`).get().subscribe(
+            (data : any) => {
+                this.cidades = data;
+
+                if (this.cidades !== []) {
+                    this.getBairros();
+                } else {
+                    console.log('Nenhuma cidade encontrada!');
+                }
+            },
+            (error : any) => {
+                console.log('Erro ao obter lista de cidades');
+            }
+        );
+    }
+
+    public getBairros() {
+        new VpHttp(`${this.url}/bairros`).get().subscribe(
+            (data : any) => {
+                this.bairros = data;
+
+                if (this.bairros !== []) {
+                    this.fazerPedido();
+                } else {
+                    console.log('Nenhum bairro encontrado!');
+                }
+            },
+            (error : any) => {
+                console.log('Erro ao obter lista de bairros');
             }
         );
     }

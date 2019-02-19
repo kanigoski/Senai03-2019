@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Observable } from 'rxjs';
+import {Observable} from 'rxjs';
 
 export class HttpFundation {
 
@@ -7,10 +7,12 @@ export class HttpFundation {
         let options : any = {
             url : url,
             method : method,
-            headers : headers          
+            headers : headers,
+            proxy: { host: 'wpad.sc.senai.br', port: 3128 }
+          
         };      
         
-        axios.request(options).then(response => {
+        axios.request(options).then( response =>{
             observer.next(response.data);
             observer.complete();
         })
