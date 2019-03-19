@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Home</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <!-- <button ion-button primary (click)="buttonclick()">teste</button>
+  <button ion-button danger (click)="adicionarAlunos()">carregar alunos</button>
+  <button ion-button danger (click)="limparAlunos()">limpar alunos</button>
+  <button ion-button primary (click)="showMessage()">mostrar menssagem</button>
+  <button ion-button primary (click)="showToast()">toast amostra</button>
+  <div *ngIf="exibirconteudo" >
+    <ion-list>
+      <ion-item >
+        <ion-label>alunos</ion-label>
+          <ion-select >
+            <ion-option value="{{aluno.name}}" *ngFor="let aluno of listaAlunos">{{aluno.name}}</ion-option>
+          </ion-select>
+
+
+      </ion-item>
+    </ion-list>
+  </div> -->
+  <form (ngSubmit)="logform()">
+    <ion-list>
+
+      <ion-item>
+        <ion-label floating>Usuário</ion-label>
+        <ion-input type="text" [(ngModel)]="usuario" name="username"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Senha</ion-label>
+        <ion-input type="password" [(ngModel)]="pass" name="password"></ion-input>
+      </ion-item>
+
+    </ion-list>
+    <div padding>
+      <button ion-button color="danger" type="submit" block >Entrar</button>
+    </div>
+</form>
+</ion-content>
