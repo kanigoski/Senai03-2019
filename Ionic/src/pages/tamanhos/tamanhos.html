@@ -1,0 +1,28 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>tamanhos</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+    <ion-item>
+      <ion-label>Tamanhos</ion-label>
+      <ion-select [(ngModel)]="tamanho">
+          <ion-option *ngFor="let tam of listaTamanhos">{{tam.name}}</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+  <ion-list>
+      <ion-item>
+        <ion-label>Sabores</ion-label>
+        <ion-select [(ngModel)]="sabor">
+            <ion-option *ngFor="let sab of listaSabores">{{sab.sabor}}</ion-option>
+          
+        </ion-select>
+      </ion-item>
+    </ion-list>
+</ion-content>
