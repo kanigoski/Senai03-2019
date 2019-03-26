@@ -9,20 +9,20 @@
 
 <ion-content padding>
   <ion-list>
-    <ion-item>
-      <ion-label>Tamanhos</ion-label>
-      <ion-select [(ngModel)]="tamanho">
-          <ion-option *ngFor="let tam of listaTamanhos">{{tam.name}}</ion-option>
-      </ion-select>
+    <ion-list>
+      <button ion-item *ngFor="let tam of listaTamanhos" (click)="obterSabores(tam)">
+        {{ tam.name }}
+      </button>
+    </ion-list>
+  </ion-list>
+
+  <ion-list *ngIf="listaSabores.length > 0">
+    <h3>Sabores</h3>
+    <ion-item *ngFor="let sab of listaSabores">
+      {{ sab.sabor }}
+      <ion-note item-end>
+          R$ {{ sab.preco }}
+      </ion-note>
     </ion-item>
   </ion-list>
-  <ion-list>
-      <ion-item>
-        <ion-label>Sabores</ion-label>
-        <ion-select [(ngModel)]="sabor">
-            <ion-option *ngFor="let sab of listaSabores">{{sab.sabor}}</ion-option>
-          
-        </ion-select>
-      </ion-item>
-    </ion-list>
 </ion-content>

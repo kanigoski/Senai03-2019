@@ -1,5 +1,6 @@
 import { SaboresProvider } from './../../providers/sabores';
 import { TamanhosProvider } from './../../providers/tamanhos';
+import { SaboresPage } from '../sabores/sabores';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
@@ -25,14 +26,16 @@ export class TamanhosPage {
   ionViewDidLoad() {
     this.tamanhos.tamanhos().subscribe(
       (data : any) => {
-        console.log('data', data);
         this.listaTamanhos = data;
       },
       (error : any) => {
         console.log(error);
       }
     )
-    this.sabores.sabores('1').subscribe(
+  }
+
+  obterSabores(item) {
+    this.sabores.sabores(item.id).subscribe(
       (data : any) => {
         this.listaSabores = data;
   
