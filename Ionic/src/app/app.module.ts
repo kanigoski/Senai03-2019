@@ -14,11 +14,14 @@ import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { LoginPage } from './../pages/login/login';
 import { TamanhosPage } from './../pages/tamanhos/tamanhos';
+import {DadosEntregaPage} from '../pages/dados-entrega/dados-entrega';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import {Messages} from '../providers/messages';
 import {Toasted} from '../providers/toast';
+import {CidadeProvider} from '../providers/cidade';
+import {BairroProvider} from '../providers/bairro';
 
 @NgModule({
   declarations: [
@@ -26,7 +29,8 @@ import {Toasted} from '../providers/toast';
     HomePage,
     ListPage,
     LoginPage,
-    TamanhosPage
+    TamanhosPage,
+    DadosEntregaPage
   ],
   imports: [
     BrowserModule,
@@ -39,7 +43,8 @@ import {Toasted} from '../providers/toast';
     HomePage,
     ListPage,
     LoginPage,
-    TamanhosPage
+    TamanhosPage,
+    DadosEntregaPage
   ],
   providers: [
     StatusBar,
@@ -50,6 +55,8 @@ import {Toasted} from '../providers/toast';
     HttpProvider,
     TamanhosProvider,
     SaboresProvider,
+    CidadeProvider,
+    BairroProvider,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

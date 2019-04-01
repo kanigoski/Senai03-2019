@@ -3,6 +3,7 @@ import { TamanhosProvider } from './../../providers/tamanhos';
 import { SaboresPage } from '../sabores/sabores';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { DadosEntregaPage } from '../dados-entrega/dados-entrega';
 
 /**
  * Generated class for the TamanhosPage page.
@@ -43,7 +44,10 @@ export class TamanhosPage {
       (error : any) => {
         console.log(error);
       }
-  
     )
+  }
+
+  dadosEntrega() {
+    this.navCtrl.setRoot(DadosEntregaPage);
   }
 }
