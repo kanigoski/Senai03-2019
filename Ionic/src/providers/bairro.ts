@@ -13,7 +13,7 @@ export class BairroProvider {
   constructor( public httpProvider : HttpProvider) {
   }
   public bairros(codCidade){
-    this.httpProvider.url = `http://104.196.102.231/bairros/${codCidade}`;
+    this.httpProvider.url = `http://localhost:3000/bairros/${codCidade}`;
     return this.httpProvider.get();
   }
 }
