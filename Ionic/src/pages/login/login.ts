@@ -13,6 +13,10 @@ export class LoginPage {
   user:string;
   senha:string;
 
+  newUser:string;
+  newPassword: string;
+  name: string;
+
   constructor(public navCtrl: NavController, public navParams: NavParams, private toast : Toasted, private logon : LoginProvider) {
   }
 
@@ -20,15 +24,32 @@ export class LoginPage {
     console.log('ionViewDidLoad LoginPage');
   }
 
+  openModalRegister() {
+
+  }
+
+  cadastrar() {
+    this.logon.cadastrar(this.newUser, this.newPassword, this.name).subscribe(
+      (data : any) => {
+        if(data.response === 200) {
+          this.toast.presentToast(`Usuário ${this.name} criado com sucesso!`);
+        } else {
+          console.log('Data', data.message)
+          this.toast.presentToast(data.message);
+        }
+      }
+    )
+  }
+
   login(){
     this.logon.singIn(this.user, this.senha).subscribe(
       (data : any) => {
-        this.navCtrl.setRoot(TamanhosPage);
+        if(data.response === 200) {
+          this.toast.presentToast(`Usuário: ${data.userName} logado com sucesso!`);
+        } else {
+          this.toast.presentToast(data.message);
+        }
       },
-      (error : any) => {
-        this.toast.presentToast("Login ou senha incorretos!");
-        console.log(error);
-      }
     )
   };
 }

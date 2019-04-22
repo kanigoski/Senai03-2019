@@ -53,7 +53,7 @@ export class HttpProvider {
     if ( obj != null && obj != undefined){
       body = JSON.stringify(obj);
     }
-    return this.http.post(this.url, body,{headers: headers}).timeout(this.TIMEOUT).map((res : Response) => res.json);
+    return this.http.post(this.url, body,{headers: headers}).timeout(this.TIMEOUT).map((res : Response) => res.json());
   }
   public put(obj : any){
     let body : string = '';
@@ -64,7 +64,7 @@ export class HttpProvider {
       body = JSON.stringify(obj);
     }
 
-    return this.http.put(this.url, body, {headers: headers}).timeout(this.TIMEOUT);;
+    return this.http.put(this.url, body,{headers: headers}).timeout(this.TIMEOUT).map((res : Response) => res.json());
 
   }
   public patch (obj : any){

@@ -18,8 +18,19 @@ export class LoginProvider {
       userName : userName,
       password : password,
     };
-    this.httpProvider.url = 'http://104.196.102.231/logon';
+
+    this.httpProvider.url = 'http://localhost:3000/logon';
     return this.httpProvider.post(obj);
-    
+  }
+
+  public cadastrar(userName: string, password: string, name: string) {
+    let obj = {
+      userName: userName,
+      password: password,
+      name: name,
+    }
+
+    this.httpProvider.url = 'http://localhost:3000/create';
+    return this.httpProvider.put(obj);
   }
 }
