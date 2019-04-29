@@ -6,12 +6,11 @@
 
 </ion-header>
 
-
 <ion-content padding>
   <ion-list>
     <ion-list>
       <button ion-item *ngFor="let tam of listaTamanhos" (click)="obterSabores(tam)">
-        {{ tam.name }}
+        {{ tam.tamanho }}
       </button>
     </ion-list>
   </ion-list>

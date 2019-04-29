@@ -25,8 +25,9 @@ export class TamanhosPage {
   }
 
   ionViewDidLoad() {
-    this.tamanhos.tamanhos().subscribe(
+    this.tamanhos.carregarTamanho().subscribe(
       (data : any) => {
+        console.log('Data', data);
         this.listaTamanhos = data;
       },
       (error : any) => {
@@ -36,10 +37,11 @@ export class TamanhosPage {
   }
 
   obterSabores(item) {
-    this.sabores.sabores(item.id).subscribe(
+    console.log('Lista', item);
+    this.tamanhos.carregarSaborById(item.codTamanho).subscribe(
       (data : any) => {
         this.listaSabores = data;
-  
+
       },
       (error : any) => {
         console.log(error);

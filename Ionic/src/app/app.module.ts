@@ -22,6 +22,7 @@ import {Messages} from '../providers/messages';
 import {Toasted} from '../providers/toast';
 import {CidadeProvider} from '../providers/cidade';
 import {BairroProvider} from '../providers/bairro';
+import { CadastroSaborPage } from '../pages/cadastro-sabor/cadastro-sabor';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import {BairroProvider} from '../providers/bairro';
     ListPage,
     LoginPage,
     TamanhosPage,
-    DadosEntregaPage
+    DadosEntregaPage,
+    CadastroSaborPage
   ],
   imports: [
     BrowserModule,
@@ -44,7 +46,8 @@ import {BairroProvider} from '../providers/bairro';
     ListPage,
     LoginPage,
     TamanhosPage,
-    DadosEntregaPage
+    DadosEntregaPage,
+    CadastroSaborPage
   ],
   providers: [
     StatusBar,

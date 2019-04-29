@@ -7,6 +7,8 @@ import { HomePage } from './../pages/home/home';
 import { ListPage } from './../pages/list/list';
 import { LoginPage } from './../pages/login/login';
 import { DadosEntregaPage } from './../pages/dados-entrega/dados-entrega';
+import { CadastroSaborPage } from '../pages/cadastro-sabor/cadastro-sabor';
+import { TamanhosPage } from '../pages/tamanhos/tamanhos';
 
 @Component({
   templateUrl: 'app.html'
@@ -27,6 +29,8 @@ export class MyApp {z
       { title: 'List', component: ListPage },
       { title: 'Login', component: LoginPage},
       { title: 'Dados Entrega', component: DadosEntregaPage },
+      { title: 'Cadastrar Sabor', component: CadastroSaborPage },
+      { title: 'Lista de Pizzas', component: TamanhosPage },
     ];
   }
 
